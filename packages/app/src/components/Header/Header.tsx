@@ -4,7 +4,6 @@
  *
  * This code is for demonstration purposes and should not be considered production ready.
  *--------------------------------------------------------------------------------------------*/
-import { AccessToken } from "@bentley/itwin-client";
 import {
   SvgImageFrame,
   SvgImodelHollow,
@@ -32,7 +31,7 @@ import { VersionHeaderButton } from "./VersionHeaderButton";
 
 interface HeaderProps {
   isAuthenticated: boolean;
-  accessToken?: AccessToken;
+  accessToken?: string;
   handleLogout: () => void;
 }
 
@@ -96,7 +95,7 @@ const RoutedHeader = ({
                   key="project"
                   projectId={projectId}
                   section={section}
-                  accessToken={accessToken?.toTokenString()}
+                  accessToken={accessToken}
                   isActive={!iModelId || section === "members"}
                 />
               )
@@ -107,7 +106,7 @@ const RoutedHeader = ({
                   key="iModel"
                   iModelId={iModelId}
                   projectId={projectId}
-                  accessToken={accessToken?.toTokenString()}
+                  accessToken={accessToken}
                   section={section}
                 />
               )
@@ -119,7 +118,7 @@ const RoutedHeader = ({
                   iModelId={iModelId}
                   projectId={projectId}
                   versionId={versionMatch?.versionId}
-                  accessToken={accessToken?.toTokenString()}
+                  accessToken={accessToken}
                   section={section}
                 />
               )
@@ -141,7 +140,7 @@ const RoutedHeader = ({
       userIcon={
         isAuthenticated && (
           <HeaderUserIcon
-            accessTokenObject={accessToken}
+            accessToken={accessToken}
             handleLogout={handleLogout}
           />
         )

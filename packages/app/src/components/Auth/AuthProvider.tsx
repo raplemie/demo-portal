@@ -4,17 +4,18 @@
  *
  * This code is for demonstration purposes and should not be considered production ready.
  *--------------------------------------------------------------------------------------------*/
-import { AccessToken, UserInfo } from "@bentley/itwin-client";
+import { UserInfo } from "@bentley/itwin-client";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { useConfig } from "../../config/ConfigProvider";
 import AuthClient from "../../services/auth/AuthClient";
+import { getClaimsFromToken } from "../../services/auth/authUtils";
 import { ai } from "../../services/telemetry";
 
 export interface AuthContextValue {
   isAuthenticated: boolean;
   isAuthorized: boolean;
-  accessToken?: AccessToken;
+  accessToken?: string;
   userInfo?: UserInfo;
   signOut: () => void;
 }
@@ -32,7 +33,7 @@ const AuthContext = React.createContext<AuthContextValue>({
 });
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [accessToken, setAccessToken] = useState<AccessToken>();
+  const [accessToken, setAccessToken] = useState<string>();
   const [userInfo, setUserInfo] = useState<UserInfo>();
 
   const { auth } = useConfig();
@@ -49,9 +50,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           );
         }
         const client = AuthClient.initialize(auth.clientId, auth.authority);
-        client.onUserStateChanged.addListener((token?: AccessToken) => {
-          setAccessToken(token);
-          const userInfo = token?.getUserInfo();
+        client.onUserStateChanged.addListener((token) => {
+          const tokenString = token?.toTokenString();
+          setAccessToken(tokenString);
+          const userInfo = UserInfo.fromTokenResponseJson(
+            getClaimsFromToken(tokenString ?? "")
+          );
           setUserInfo(userInfo);
           ai.updateUserInfo(userInfo);
         });
@@ -75,15 +79,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const isAuthorized = useMemo(() => {
     if (auth?.whitelistedIds) {
-      if (userInfo?.organization?.id) {
+      const tokenObject = getClaimsFromToken(accessToken ?? "");
+      if (tokenObject?.org) {
         const whitelist = auth.whitelistedIds.split(" ");
-        const orgId = userInfo.organization?.id;
-        return whitelist.includes(orgId);
+        return whitelist.includes(tokenObject?.org);
       }
       return false;
     }
     return true;
-  }, [auth, userInfo]);
+  }, [accessToken, auth]);
 
   const signOut = useCallback(async () => {
     await AuthClient.signOut();
