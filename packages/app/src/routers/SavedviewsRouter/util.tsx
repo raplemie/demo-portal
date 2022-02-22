@@ -41,10 +41,7 @@ export const createSelectionStateController: <T extends {
   id?: string;
 }>(
   selected: string | undefined
-) => UseStateControllerFn<T> = (selected: string | undefined) => (
-  state,
-  meta
-) => {
+) => UseStateControllerFn<T> = (selected: string | undefined) => (state) => {
   if (selected) {
     state.selectedRowIds = { [selected]: true } as any;
   } else {
