@@ -55,6 +55,11 @@ export const apply3dView = (
     clone.categorySelector.addCategories(view.categories.enabled);
   }
   vp.changeView(clone, { animationTime: 100 });
+  if (view.camera) {
+    vp.turnCameraOn();
+  } else {
+    vp.turnCameraOff(); // Or don't change it ???
+  }
   if (view.models?.enabled && view.models.enabled.length > 0) {
     vp.changeViewedModels(view.models.enabled);
   }
