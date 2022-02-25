@@ -63,9 +63,7 @@ export const HeaderUserIcon = ({
           key={"token"}
           onClick={() => {
             const token = accessToken ?? "";
-            navigator.clipboard.writeText(token).catch(() => {
-              //Noop
-            });
+            void navigator.clipboard.writeText(token);
           }}
         >
           Copy token
