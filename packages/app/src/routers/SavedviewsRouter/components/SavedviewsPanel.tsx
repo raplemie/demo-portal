@@ -99,10 +99,6 @@ export const SavedviewPanel = ({
   }, [working]);
 
   const submit = React.useCallback(() => {
-    if (!displayName.trim()) {
-      setStatus({ status: "warning", message: "A name must be provided" });
-      return;
-    }
     setWorking(true);
     if (savedview) {
       const update: SavedViewUpdateSavedviewsAPI = {};
@@ -228,6 +224,7 @@ export const SavedviewPanel = ({
         style={{
           maxWidth: 450,
           gridRow: 1,
+          overflow: "auto",
         }}
       >
         <Text>{savedview?.id ?? ""}</Text>
