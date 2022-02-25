@@ -138,7 +138,7 @@ export const useSavedviewsInfo = (
       savedview: CreateSavedViewPayload,
       image?: ImageUpdateSavedviewsAPI
     ) => {
-      if (accessToken && projectId && savedview.displayName) {
+      if (accessToken && projectId) {
         const client = new SavedviewsClient(urlPrefix, accessToken);
         const { savedView: created } = await client.createSavedview({
           projectId,

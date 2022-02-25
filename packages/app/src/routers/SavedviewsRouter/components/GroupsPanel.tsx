@@ -54,13 +54,6 @@ export const GroupCreatePanel = ({
   }, [working]);
 
   const submit = React.useCallback(() => {
-    if (!displayName.trim()) {
-      setStatus({
-        status: "warning",
-        message: "A name must be provided",
-      });
-      return;
-    }
     setWorking(true);
     if (group) {
       const update: GroupUpdateSavedviewsAPI = {};

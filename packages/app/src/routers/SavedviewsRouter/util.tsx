@@ -4,12 +4,13 @@
  *
  * This code is for demonstration purposes and should not be considered production ready.
  *--------------------------------------------------------------------------------------------*/
-import { Code, TableProps, toaster } from "@itwin/itwinui-react";
+import { Code, Small, TableProps, toaster } from "@itwin/itwinui-react";
 import React from "react";
 
-export const toastErrorWithCode = (e: any, message: string) => {
+export const toastErrorWithCode = (e: Response, message: string) => {
   if (typeof e.json === "function") {
-    e.json().then((body: string) => {
+    const activityId = e?.headers?.get?.("x-correlation-id");
+    void e.json().then((body: string) => {
       toaster.negative(
         <>
           {message}
@@ -17,6 +18,7 @@ export const toastErrorWithCode = (e: any, message: string) => {
           <Code style={{ whiteSpace: "pre" }}>
             {JSON.stringify(body, undefined, 2)}
           </Code>
+          {activityId ? <Small>ActivityId: {activityId}</Small> : null}
         </>
       );
     });
