@@ -4,9 +4,12 @@
  *
  * This code is for demonstration purposes and should not be considered production ready.
  *--------------------------------------------------------------------------------------------*/
+import { IModelApp } from "@bentley/imodeljs-frontend";
+import { ITwinWidgetsManager } from "@bentley/itwin-widgets";
+import { UiItemsProvider } from "@bentley/ui-abstract";
 import { Viewer } from "@itwin/web-viewer-react";
 import { RouteComponentProps, Router } from "@reach/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { useApiData } from "../../api/useApiData";
 import { useConfig } from "../../config/ConfigProvider";
@@ -17,6 +20,7 @@ import {
 } from "../SavedviewsRouter/UIProviders/SavedviewSnapper";
 import { SelectionRouter } from "../SelectionRouter/SelectionRouter";
 import { SimpleBgMapToggleProvider } from "./UiProviders/BackgroundMap";
+import { ITwinWidgetsProvider } from "./UiProviders/ITwinWidgets";
 
 const useThemeWatcher = () => {
   const [theme, setTheme] = React.useState(() =>
@@ -62,6 +66,7 @@ const View = (props: ViewProps) => {
   });
   const theme = useThemeWatcher();
   const changesetId = props.versionId ? fetchedVersion?.changesetId : undefined;
+
   return state || !props.versionId ? (
     <SavedviewSnapperContextProvider
       accessToken={props.accessToken}
@@ -73,10 +78,21 @@ const View = (props: ViewProps) => {
         changeSetId={changesetId}
         contextId={props.projectId ?? ""}
         iModelId={props.iModelId ?? ""}
+        onIModelAppInit={() => {
+          ITwinWidgetsManager.initialize(IModelApp.i18n)
+            .then()
+            .catch((e) => {
+              console.log(e);
+            });
+        }}
         authConfig={{ oidcClient: AuthClient.client }}
         theme={theme}
         backend={{ buddiRegion }}
-        uiProviders={[new SimpleBgMapToggleProvider(), new SavedviewSnapper()]}
+        uiProviders={[
+          new SimpleBgMapToggleProvider(),
+          new SavedviewSnapper(),
+          new ITwinWidgetsProvider(),
+        ]}
       />
     </SavedviewSnapperContextProvider>
   ) : null;
