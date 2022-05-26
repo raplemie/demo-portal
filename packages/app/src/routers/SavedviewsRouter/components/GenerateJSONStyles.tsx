@@ -12,7 +12,6 @@ export function generateJSONInStyles(newBackground: ElementProps, path: any[]) {
   for (let i = 0; i < path.length; i++) {
     if (i === path.length - 1) {
       destination[path[i - 1]] = path[i];
-      console.log("got here");
       return;
     }
     if (destination[path[i]] === undefined) {

@@ -61,8 +61,6 @@ export function ComponentsColorPicker({
           if (vp !== undefined && newBackground !== undefined) {
             reloadDisplayStyle(vp, newBackground);
           }
-
-          console.log(JSON.stringify(newBackground, undefined, 2));
         }}
       />
     </div>
@@ -120,8 +118,6 @@ export function ComponentsSlider({
           if (vp !== undefined && newBackground !== undefined) {
             reloadDisplayStyle(vp, newBackground);
           }
-
-          console.log(JSON.stringify(newBackground, undefined, 2));
         }}
       />
     </div>
@@ -174,8 +170,6 @@ export function ComponentsTextbox({
           if (vp !== undefined && newBackground !== undefined) {
             reloadDisplayStyle(vp, newBackground);
           }
-
-          console.log(JSON.stringify(newBackground, undefined, 2));
         }}
       />
     </div>

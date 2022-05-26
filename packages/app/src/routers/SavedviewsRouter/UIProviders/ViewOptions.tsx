@@ -22,7 +22,6 @@ export class ViewOptionsProvider implements UiItemsProvider {
     stageUsage: string,
     location: StagePanelLocation,
     section?: StagePanelSection | undefined
-    // zoneLocation?: AbstractZoneLocation | undefined
   ): AbstractWidgetProps[] {
     const widgets: AbstractWidgetProps[] = [];
     if (

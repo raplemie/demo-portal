@@ -152,7 +152,6 @@ export function RenderModeDropdown() {
 }
 
 export function RenderModeSelector() {
-  // TODO: Proper alignment of the label and dropdown
   return (
     <div className="idp-render-mode">
       <div className="idp-render-mode-label two-object-container-row">
