@@ -30,6 +30,29 @@ export const useSavedviewsInfo = (
     SavedViewSavedviewsAPI[]
   >();
 
+  const [thumbnails, setThumbnails] = React.useState<Record<string, string>>(
+    {}
+  );
+  const thumbnailRequestor = React.useRef<
+    Record<string, Promise<void> | undefined>
+  >({});
+
+  const fetchThumbnail = React.useCallback(
+    async (id: string) => {
+      if (!accessToken || !id) {
+        return;
+      }
+      const client = new SavedviewsClient(urlPrefix, accessToken);
+      try {
+        const { href } = await client.getThumbnail(id);
+        return href;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [accessToken, urlPrefix]
+  );
+
   const fetchImage = React.useCallback(
     async (id: string) => {
       if (!accessToken || !id) {
@@ -60,6 +83,23 @@ export const useSavedviewsInfo = (
     },
     [accessToken, urlPrefix]
   );
+
+  React.useEffect(() => {
+    savedviews?.forEach((s) => {
+      if (thumbnailRequestor.current[s.id]) {
+        return;
+      }
+      thumbnailRequestor.current[s.id] = fetchThumbnail(s.id).then((image) => {
+        if (!image) {
+          return;
+        }
+        setThumbnails((thumbnails) => ({
+          ...thumbnails,
+          [s.id]: image,
+        }));
+      });
+    });
+  }, [fetchImage, fetchThumbnail, savedviews]);
 
   const fetchSavedview = React.useCallback(
     async (id: string) => {
@@ -98,7 +138,7 @@ export const useSavedviewsInfo = (
       savedview: CreateSavedViewPayload,
       image?: ImageUpdateSavedviewsAPI
     ) => {
-      if (accessToken && projectId && savedview.displayName) {
+      if (accessToken && projectId) {
         const client = new SavedviewsClient(urlPrefix, accessToken);
         const { savedView: created } = await client.createSavedview({
           projectId,
@@ -138,6 +178,7 @@ export const useSavedviewsInfo = (
 
   return {
     savedviews,
+    thumbnails,
     fetchImage,
     putImage,
     createSavedview,

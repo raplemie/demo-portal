@@ -4,12 +4,20 @@
  *
  * This code is for demonstration purposes and should not be considered production ready.
  *--------------------------------------------------------------------------------------------*/
-import { Code, TableProps, toaster } from "@itwin/itwinui-react";
+import { SvgCopy } from "@itwin/itwinui-icons-react";
+import {
+  Code,
+  IconButton,
+  Small,
+  TableProps,
+  toaster,
+} from "@itwin/itwinui-react";
 import React from "react";
 
-export const toastErrorWithCode = (e: any, message: string) => {
+export const toastErrorWithCode = (e: Response, message: string) => {
   if (typeof e.json === "function") {
-    e.json().then((body: string) => {
+    const activityId = e?.headers?.get?.("x-correlation-id");
+    void e.json().then((body: string) => {
       toaster.negative(
         <>
           {message}
@@ -17,7 +25,25 @@ export const toastErrorWithCode = (e: any, message: string) => {
           <Code style={{ whiteSpace: "pre" }}>
             {JSON.stringify(body, undefined, 2)}
           </Code>
-        </>
+          {activityId ? (
+            <Small>
+              ActivityId: {activityId}{" "}
+              <IconButton
+                title={"Copy ActivityId"}
+                styleType="borderless"
+                onClick={() => {
+                  void navigator.clipboard.writeText(activityId);
+                }}
+              >
+                <SvgCopy />
+              </IconButton>
+            </Small>
+          ) : null}
+        </>,
+        {
+          hasCloseButton: true,
+          type: "persisting",
+        }
       );
     });
   } else {
@@ -41,10 +67,7 @@ export const createSelectionStateController: <T extends {
   id?: string;
 }>(
   selected: string | undefined
-) => UseStateControllerFn<T> = (selected: string | undefined) => (
-  state,
-  meta
-) => {
+) => UseStateControllerFn<T> = (selected: string | undefined) => (state) => {
   if (selected) {
     state.selectedRowIds = { [selected]: true } as any;
   } else {

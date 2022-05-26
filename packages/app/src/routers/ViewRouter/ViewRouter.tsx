@@ -11,12 +11,10 @@ import React from "react";
 import { useApiData } from "../../api/useApiData";
 import { useConfig } from "../../config/ConfigProvider";
 import AuthClient from "../../services/auth/AuthClient";
+import { SavedviewSnapperContextProvider } from "../SavedviewsRouter/components/SavedviewSnapperContext";
 import { ColorUiProvider } from "../SavedviewsRouter/UIProviders/ColorOptions";
 import { ChangeLightsUiProvider } from "../SavedviewsRouter/UIProviders/LightsOptions";
-import {
-  SavedviewSnapper,
-  SavedviewSnapperContextProvider,
-} from "../SavedviewsRouter/UIProviders/SavedviewSnapper";
+import { SavedviewSnapper } from "../SavedviewsRouter/UIProviders/SavedviewSnapper";
 import { ViewOptionsProvider } from "../SavedviewsRouter/UIProviders/ViewOptions";
 import { SelectionRouter } from "../SelectionRouter/SelectionRouter";
 import { SimpleBgMapToggleProvider } from "./UiProviders/BackgroundMap";
@@ -65,12 +63,23 @@ const View = (props: ViewProps) => {
   });
   const theme = useThemeWatcher();
   const changesetId = props.versionId ? fetchedVersion?.changesetId : undefined;
+  const [selectedSavedview, setSelectedSavedview] = React.useState<string>();
+  const selectSavedview = React.useCallback((savedviewId: string) => {
+    setSelectedSavedview(savedviewId);
+    const url = window.location.href.includes("savedview")
+      ? window.location.href.replace(/([^/]*)$/, savedviewId)
+      : `${window.location.href}/savedview/${savedviewId}`;
+    if (url) {
+      window.history.replaceState(window.history.state, "", url);
+    }
+  }, []);
   return state || !props.versionId ? (
     <SavedviewSnapperContextProvider
       accessToken={props.accessToken}
       projectId={props.projectId}
       iModelId={props.iModelId}
-      savedviewId={props.savedviewId}
+      savedviewId={selectedSavedview ?? props.savedviewId}
+      selectSavedview={selectSavedview}
     >
       <Viewer
         changeSetId={changesetId}

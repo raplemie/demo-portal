@@ -45,10 +45,6 @@ export const TagPanel = ({
   }, [working]);
 
   const submit = React.useCallback(() => {
-    if (!displayName.trim()) {
-      setStatus({ status: "warning", message: "A name must be provided" });
-      return;
-    }
     setWorking(true);
     if (tag) {
       const update: TagUpdateSavedviewsAPI = {};

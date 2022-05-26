@@ -1,3 +1,9 @@
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *
+ * This code is for demonstration purposes and should not be considered production ready.
+ *--------------------------------------------------------------------------------------------*/
 import {
   Button,
   Code,
@@ -29,12 +35,6 @@ import { toastErrorWithCode } from "../util";
 import { ButtonBar } from "./ButtonBar";
 import "./SavedviewsPanel.scss";
 
-/*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *
- * This code is for demonstration purposes and should not be considered production ready.
- *--------------------------------------------------------------------------------------------*/
 interface SavedviewCreatePanelProps {
   view?: ViewSavedviewsAPI | undefined;
   image?: string;
@@ -71,6 +71,7 @@ export const SavedviewPanel = ({
   const [shared, setShared] = React.useState(false);
   const [tagList, setTagList] = React.useState<string[]>([]);
   const [group, setGroup] = React.useState("");
+  const [category, setCategory] = React.useState("");
   const [status, setStatus] = React.useState<{
     status?: "positive" | "warning" | "negative" | undefined;
     message?: string | undefined;
@@ -80,6 +81,7 @@ export const SavedviewPanel = ({
     (savedview as SavedViewWithDataSavedviewsAPI)?.savedViewData ?? view;
   const reset = React.useCallback(() => {
     setDisplayName(savedview ? savedview.displayName : "");
+    setCategory(savedview ? savedview.category ?? "" : "");
     setShared(savedview ? savedview.shared : false);
     setGroup(
       savedview
@@ -97,15 +99,14 @@ export const SavedviewPanel = ({
   }, [working]);
 
   const submit = React.useCallback(() => {
-    if (!displayName.trim()) {
-      setStatus({ status: "warning", message: "A name must be provided" });
-      return;
-    }
     setWorking(true);
     if (savedview) {
       const update: SavedViewUpdateSavedviewsAPI = {};
       if (displayName.trim() !== savedview.displayName) {
         update.displayName = displayName;
+      }
+      if (category.trim() !== savedview.category ?? "") {
+        update.category = category;
       }
       if (shared !== savedview.shared) {
         update.shared = shared;
@@ -163,6 +164,9 @@ export const SavedviewPanel = ({
           itwin3dView: { extents: [0, 0, 0], origin: [0, 0, 0] },
         },
       };
+      if (category.trim()) {
+        createPayload.category = category;
+      }
       if (group) {
         createPayload.groupId = group;
       }
@@ -202,6 +206,7 @@ export const SavedviewPanel = ({
   }, [
     displayName,
     savedview,
+    category,
     shared,
     group,
     tagList,
@@ -219,6 +224,7 @@ export const SavedviewPanel = ({
         style={{
           maxWidth: 450,
           gridRow: 1,
+          overflow: "auto",
         }}
       >
         <Text>{savedview?.id ?? ""}</Text>
@@ -234,6 +240,12 @@ export const SavedviewPanel = ({
             }
           }}
         />
+        <LabeledInput
+          label="Category"
+          value={category}
+          disabled={working}
+          onChange={(e) => setCategory(e.target.value)}
+        />
         <LabeledSelect
           label="Group"
           value={group}
@@ -248,7 +260,7 @@ export const SavedviewPanel = ({
           onChange={(value) => setGroup(value)}
         />
         <InputGroup label="Tags">
-          <TagContainer>
+          <div className="idp-tag-controller">
             <Tag id={"new"}>
               <DropdownButton
                 disabled={working}
@@ -274,20 +286,22 @@ export const SavedviewPanel = ({
                 Select
               </DropdownButton>
             </Tag>
-            {tagList.map((id) => (
-              <Tag
-                key={id}
-                onRemove={
-                  working
-                    ? undefined
-                    : () =>
-                        setTagList((list) => list.filter((tag) => tag !== id))
-                }
-              >
-                {tags.find((tag) => tag.id === id)?.displayName}
-              </Tag>
-            ))}
-          </TagContainer>
+            <TagContainer overflow="scroll">
+              {tagList.map((id) => (
+                <Tag
+                  key={id}
+                  onRemove={
+                    working
+                      ? undefined
+                      : () =>
+                          setTagList((list) => list.filter((tag) => tag !== id))
+                  }
+                >
+                  {tags.find((tag) => tag.id === id)?.displayName}
+                </Tag>
+              ))}
+            </TagContainer>
+          </div>
         </InputGroup>
         <ToggleSwitch
           label="Shared"

@@ -83,6 +83,11 @@ export const SavedviewsTable = ({
                 Cell: SkeletonCell,
               },
               {
+                Header: "Category",
+                accessor: "category",
+                Cell: SkeletonCell,
+              },
+              {
                 Header: "Group",
                 id: "group",
                 accessor: "id",

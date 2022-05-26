@@ -4,29 +4,16 @@
  *
  * This code is for demonstration purposes and should not be considered production ready.
  *--------------------------------------------------------------------------------------------*/
-.idp-savedview-panel {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(auto, 450px);
-  gap: 12px;
-  height: 412px;
-  overflow: hidden;
-
-  > :nth-child(1n + 2) > :nth-child(2) {
-    overflow: auto;
+/**
+ * Returns the main part of a JWT as an object.
+ * @param token OAuth JWT
+ * @returns Object, or undefined if cant be parsed.
+ */
+export const getClaimsFromToken = (token: string) => {
+  const [, body] = token.split(".");
+  try {
+    return JSON.parse(atob(body));
+  } catch {
+    return undefined;
   }
-
-  > * {
-    overflow: hidden;
-  }
-
-  .img-fit {
-    max-width: 100%;
-    max-height: 100%;
-  }
-}
-
-.idp-tag-controller {
-  display: flex;
-  gap: 4px;
-}
+};

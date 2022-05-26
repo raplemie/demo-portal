@@ -29,7 +29,8 @@ export class SavedviewsClient {
   private savedviewsApi: SavedViewsApi;
   private imageApi: ImagesApi;
   constructor(urlPrefix: string, private accessToken: string) {
-    const baseUrl = prefixUrl(BASE_PATH, urlPrefix);
+    const baseUrl =
+      process.env.IMJS_SAVEDVIEW_SERVICE_URL ?? prefixUrl(BASE_PATH, urlPrefix);
     this.groupsApi = new GroupsApi(undefined, baseUrl);
     this.tagsApi = new TagsApi(undefined, baseUrl);
     this.savedviewsApi = new SavedViewsApi(undefined, baseUrl);
