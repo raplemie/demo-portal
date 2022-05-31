@@ -79,7 +79,7 @@ export function SelectedElementColorPicker({
   // TODO: Better formatting for label
   return (
     <div className="idp-label-with-color-picker">
-      <div>{label}</div>
+      <div className="idp-label">{label}</div>
       <ColorPickerButton
         initialColor={ColorDef.fromString("skyblue")}
         onColorPick={(color: ColorDef) => {
