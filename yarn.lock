@@ -1343,16 +1343,6 @@
     xmldom "^0.6.0"
     xpath "0.0.27"
 
-"@bentley/map-layers@^2.19.3":
-  version "2.19.28"
-  resolved "https://registry.yarnpkg.com/@bentley/map-layers/-/map-layers-2.19.28.tgz#11b509baf155578ed4bc4414e93bc5d1aa7dec96"
-  integrity sha512-6+kmgZRyQHKGrjrIQQZQ1rtyp4JG0JYa/in5LoEvKBADBhrWQU7Ti7bh5o86wa/e9Zs+eJAHuPPV2CBXOZ8BjA==
-  dependencies:
-    classnames "^2.3.1"
-    react-beautiful-dnd "^13.0.0"
-    react-compound-slider "^2.5.0"
-    react-select "3.1.0"
-
 "@bentley/orbitgt-core@^2.19.3":
   version "2.19.3"
   resolved "https://registry.yarnpkg.com/@bentley/orbitgt-core/-/orbitgt-core-2.19.3.tgz#2bbe13f8b80c015fc3ab8094ce3c0a8f065fd484"
@@ -1809,10 +1799,10 @@
   resolved "https://registry.yarnpkg.com/@itwin/itwinui-css/-/itwinui-css-0.24.7.tgz#6be2e922eddacd520d33bd0b1ccb51d17cdfa261"
   integrity sha512-5HJNGUNtnL7NMhtv5THmlx3LGoF+M+kwftEUhl9zxfvVS2nXkn3pY1dunXt8MESANcV91rQmOfJrSyXDdd6A/A==
 
-"@itwin/itwinui-css@^0.25.2":
-  version "0.25.2"
-  resolved "https://registry.yarnpkg.com/@itwin/itwinui-css/-/itwinui-css-0.25.2.tgz#fba03c9ab73af9deec4e826d76e41281d47a56a2"
-  integrity sha512-eiyaz6Uqy+SGlpaymYRM+Oej+/OaHvSK8LefEHbqubfWTryICaYzQQJctweBgdOz/A6eS6Tf5BlecIMY61iN6w==
+"@itwin/itwinui-css@^0.58.0":
+  version "0.58.0"
+  resolved "https://registry.yarnpkg.com/@itwin/itwinui-css/-/itwinui-css-0.58.0.tgz#e385efc7ce903fc56e955976271e366fa3c0265c"
+  integrity sha512-BBMoB8OuMR8v5ndBgZlWDSEgIuJzOh5ja3WxH3w2uaT3VWnFMS00DURhYnfNnBOqnWbGWz7v8eX56GuZfIhUbQ==
 
 "@itwin/itwinui-css@^0.9.0":
   version "0.9.0"
@@ -1828,6 +1818,11 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@itwin/itwinui-icons-react/-/itwinui-icons-react-1.2.0.tgz#82c6f6896639990c31ee806ee2af6a9ed23856fd"
   integrity sha512-yeBIJPWli/iLKaTLmhsd7ZOn9bMRouN3dGHggJjBjAsgJNNtahbfB/NfOS17DcN6Ejt4Z70VAzMdpwzJ/34CKA==
+
+"@itwin/itwinui-icons-react@^1.5.0":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@itwin/itwinui-icons-react/-/itwinui-icons-react-1.10.1.tgz#fb6517089ba964a57cc3fec37a63af3ccd4768e0"
+  integrity sha512-kBxDI1TuKiVtHhGmRVX5oOz1dszKvNUcYcDYOd2RzKVbHA8nMfx6dq3E8n4j2FeYGgxM9/wYpe/4wE0ykS8NuA==
 
 "@itwin/itwinui-illustrations-react@^1.0.1":
   version "1.0.2"
@@ -1848,13 +1843,13 @@
     react-table "^7.1.0"
     react-transition-group "^4.1.1"
 
-"@itwin/itwinui-react@^1.15.0":
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/@itwin/itwinui-react/-/itwinui-react-1.15.0.tgz#c56db301b26de2ee043eb7f002a817f73257b335"
-  integrity sha512-GEA016GIfauH2E30cZK09Ye6nzlbabwjs+LGt6cKPDt+eMjCQmkIXTyZPqWWYYRkBsBkUTI23NdclLjr9Xtqcg==
+"@itwin/itwinui-react@^1.38.1":
+  version "1.38.1"
+  resolved "https://registry.yarnpkg.com/@itwin/itwinui-react/-/itwinui-react-1.38.1.tgz#16a530f15ef2fca7ee03ffc13eb030ac23afc0bc"
+  integrity sha512-iZPwWF85b0NJ0hI/iK3oWt+bZ5fbIi3/1LLExSyh1Z6IkemZsqbld6Wj8nnGfRQ+V3RU0e9JQUkZC77nM++m1w==
   dependencies:
-    "@itwin/itwinui-css" "^0.25.2"
-    "@itwin/itwinui-icons-react" "^1.1.1"
+    "@itwin/itwinui-css" "^0.58.0"
+    "@itwin/itwinui-icons-react" "^1.5.0"
     "@itwin/itwinui-illustrations-react" "^1.0.1"
     "@tippyjs/react" "^4.2.5"
     "@types/react-table" "^7.0.18"
@@ -5404,13 +5399,6 @@ css-blank-pseudo@^0.1.4:
   integrity sha512-LHz35Hr83dnFeipc7oqFDmsjHdljj3TQtxGGiNWSOsTLIAubSm4TEz8qCaKFpk7idaQ1GfWscF4E6mgpBysA1w==
   dependencies:
     postcss "^7.0.5"
-
-css-box-model@^1.2.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/css-box-model/-/css-box-model-1.2.1.tgz#59951d3b81fd6b2074a62d49444415b0d2b4d7c1"
-  integrity sha512-a7Vr4Q/kd/aw96bnJG332W9V9LkJO69JRcaCYDUqjp6/z0w6VcZjgAcTbgFxEPfBgdnAwlh3iwu+hLopa+flJw==
-  dependencies:
-    tiny-invariant "^1.0.6"
 
 css-color-names@0.0.4, css-color-names@^0.0.4:
   version "0.0.4"
@@ -10588,7 +10576,7 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
-"memoize-one@>=3.1.1 <6", memoize-one@^5.0.0, memoize-one@^5.1.1:
+"memoize-one@>=3.1.1 <6", memoize-one@^5.0.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.2.1.tgz#8337aa3c4335581839ec01c3d594090cebe8f00e"
   integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
@@ -13061,11 +13049,6 @@ quick-lru@^4.0.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-4.0.1.tgz#5b8878f113a58217848c6482026c73e1ba57727f"
   integrity sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==
 
-raf-schd@^4.0.2:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/raf-schd/-/raf-schd-4.0.3.tgz#5d6c34ef46f8b2a0e880a8fcdb743efc5bfdbc1a"
-  integrity sha512-tQkJl2GRWh83ui2DiPTJz9wEiMN20syf+5oKfB03yYP7ioZcJwsIK8FjrtLwH1m7C7e+Tt2yYBlrOpdT+dyeIQ==
-
 raf@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"
@@ -13140,19 +13123,6 @@ react-autosuggest@^10.0.2:
     react-themeable "^1.1.0"
     section-iterator "^2.0.0"
     shallow-equal "^1.2.1"
-
-react-beautiful-dnd@^13.0.0:
-  version "13.1.0"
-  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-13.1.0.tgz#ec97c81093593526454b0de69852ae433783844d"
-  integrity sha512-aGvblPZTJowOWUNiwd6tNfEpgkX5OxmpqxHKNW/4VmvZTNTbeiq7bA3bn5T+QSF2uibXB0D1DmJsb1aC/+3cUA==
-  dependencies:
-    "@babel/runtime" "^7.9.2"
-    css-box-model "^1.2.0"
-    memoize-one "^5.1.1"
-    raf-schd "^4.0.2"
-    react-redux "^7.2.0"
-    redux "^4.0.4"
-    use-memo-one "^1.1.1"
 
 react-compound-slider@^2.5.0:
   version "2.5.0"
@@ -15387,11 +15357,6 @@ tiny-invariant@^1.0.2:
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.1.0.tgz#634c5f8efdc27714b7f386c35e6760991d230875"
   integrity sha512-ytxQvrb1cPc9WBEI/HSeYYoGD0kWnGEOR8RY6KomWLBVhqz0RgTwVO9dLrGz7dC+nN9llyI7OKAgRq8Vq4ZBSw==
 
-tiny-invariant@^1.0.6:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.2.0.tgz#a1141f86b672a9148c72e978a19a73b9b94a15a9"
-  integrity sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==
-
 tiny-warning@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-1.0.3.tgz#94a30db453df4c643d0fd566060d60a875d84754"
@@ -15904,11 +15869,6 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
-
-use-memo-one@^1.1.1:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/use-memo-one/-/use-memo-one-1.1.2.tgz#0c8203a329f76e040047a35a1197defe342fab20"
-  integrity sha512-u2qFKtxLsia/r8qG0ZKkbytbztzRb317XCkT7yP8wxL0tZ/CzK2G+WWie5vWvpyeP7+YoPIwbJoIHJ4Ba4k0oQ==
 
 use@^3.1.0:
   version "3.1.1"

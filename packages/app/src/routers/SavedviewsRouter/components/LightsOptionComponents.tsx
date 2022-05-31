@@ -8,14 +8,14 @@ import { IModelApp } from "@bentley/imodeljs-frontend";
 import { ExpandableBlock, ToggleSwitch } from "@itwin/itwinui-react";
 import React, { useState } from "react";
 
+import { generateJSONInStyles } from "../GenerateJSONStyles";
+import { reloadDisplayStyle } from "../ReloadDisplayStyle";
 import {
   ComponentsColorPicker,
   ComponentsSlider,
   ComponentsTextbox,
 } from "./ComponentInputs";
 import "./ComponentInputs.scss";
-import { generateJSONInStyles } from "./GenerateJSONStyles";
-import { reloadDisplayStyle } from "./ReloadDisplayStyle";
 
 export interface SolarAlwaysEnabledToggleProps {
   label: string;
@@ -85,6 +85,7 @@ export function LightsOptionsPanel() {
           path={shadowColorPath}
           pathLength={shadowColorPath.length}
           dataType="JSON"
+          colorType="solarShadow"
         />
       </ExpandableBlock>
 
@@ -94,6 +95,7 @@ export function LightsOptionsPanel() {
           path={ambientLightColorpath}
           pathLength={ambientLightColorpath.length}
           dataType="JSON"
+          colorType="ambientLight"
         />
         <ComponentsSlider
           label="Ambient Intensity Color"
@@ -111,12 +113,14 @@ export function LightsOptionsPanel() {
           path={hemisphereLowerLightsColor}
           pathLength={3}
           dataType="JSON"
+          colorType="lowerColor"
         />
         <ComponentsColorPicker
           label="Upper Color"
           path={hemisphereUpperLightsColor}
           pathLength={3}
           dataType="JSON"
+          colorType="upperColor"
         />
         <ComponentsSlider
           label="Intensity"

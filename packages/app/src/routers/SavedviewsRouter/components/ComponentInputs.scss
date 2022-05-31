@@ -5,36 +5,19 @@
  * This code is for demonstration purposes and should not be considered production ready.
  *--------------------------------------------------------------------------------------------*/
 
-
-.label-with-slider {
-  margin: 5px;
+.idp-label-with-slider {
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.input-text {
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-}
-
-.label-with-color-picker {
+.idp-label-with-color-picker {
   display: flex;
   justify-content: space-between;
-  padding-right: 10px;
-  padding-left: 10px;
-  margin-top: -10px;
-  margin-bottom: -10px;
 }
 
-.color-picker-height {
-  height: 20px;
-  margin-bottom: 15px;
-  margin-top: 15px;
-}
-
-.button-label {
+.idp-button-label {
   width: 100px;
   height: 30px;
   margin: 10px;
@@ -44,19 +27,14 @@
   justify-content: center;
 }
 
-.button-container {
+.idp-button-container {
   align-items: center;
   justify-content: center;
   display: flex;
   margin: -10px;
 }
 
-.text-setting {
-  font-size: 14px;
-  font-style: normal;
-}
-
-.two-object-container-row {
+.idp-two-object-container-row {
   margin-top: 10px;
   display: flex;
   flex-direction: row;

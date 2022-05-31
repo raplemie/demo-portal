@@ -4,21 +4,21 @@
  *
  * This code is for demonstration purposes and should not be considered production ready.
  *--------------------------------------------------------------------------------------------*/
-
-// tslint:disable:@typescript-eslint/no-empty-function
 import { ColorDef } from "@bentley/imodeljs-common";
-import {
-  DisplayStyle3dState,
-  EmphasizeElements,
-  IModelApp,
-} from "@bentley/imodeljs-frontend";
+import { EmphasizeElements, IModelApp } from "@bentley/imodeljs-frontend";
 import { ColorPickerButton } from "@bentley/ui-components";
-import { Button, ExpandableBlock, ToggleSwitch } from "@itwin/itwinui-react";
+import {
+  Button,
+  ExpandableBlock,
+  Label,
+  ToggleSwitch,
+} from "@itwin/itwinui-react";
 import React, { useState } from "react";
 
+import { generateJSONInStyles } from "../GenerateJSONStyles";
+import { reloadDisplayStyle } from "../ReloadDisplayStyle";
 import { ComponentsColorPicker } from "./ComponentInputs";
 import "./ComponentInputs.scss";
-import { generateJSONInStyles } from "./GenerateJSONStyles";
 let SelectedElementColor = ColorDef.fromString("skyblue");
 
 export interface EnvironmentDisplayToggleProps {
@@ -46,7 +46,6 @@ export function EnvironmentDisplayToggle({
 
   return (
     <ToggleSwitch
-      className="text-setting"
       label={label}
       checked={toggleValue}
       onChange={() => {
@@ -64,18 +63,10 @@ export function EnvironmentDisplayToggle({
           generateJSONInStyles(newBackground, path);
         }
 
+        // Load display style again
         const vp = IModelApp.viewManager.selectedView;
-
         if (vp !== undefined && newBackground !== undefined) {
-          const state = new DisplayStyle3dState(newBackground, vp.iModel);
-          state
-            .load()
-            .then(() => {
-              vp.view.setDisplayStyle(state);
-            })
-            .catch((ex) => {
-              console.log(`Error found: ${ex}`);
-            });
+          reloadDisplayStyle(vp, newBackground);
         }
 
         setToggleValue(!toggleValue);
@@ -91,8 +82,8 @@ export function SelectedElementColorPicker({
   label,
 }: SelectedElementColorPickerProps) {
   return (
-    <div className="label-with-color-picker">
-      <h3 className="text-setting">{label}</h3>
+    <div className="idp-label-with-color-picker">
+      <Label>{label}</Label>
       <ColorPickerButton
         initialColor={ColorDef.fromString("skyblue")}
         onColorPick={(color: ColorDef) => {
@@ -112,9 +103,10 @@ export function SelectedElementColorButton({
   action,
 }: SelectedElementColorButtonProps) {
   return (
-    <div className="button-container text-setting">
+    <div className="idp-button-container">
       <Button
-        className="button-label"
+        size="small"
+        className="idp-button-label"
         onClick={() => {
           const vp = IModelApp.viewManager.selectedView;
           if (vp !== undefined) {
@@ -158,24 +150,28 @@ export function ColorOptionsPanel() {
           path={skyGroundColorPath}
           pathLength={skyGroundColorPath.length}
           dataType={"JSON"}
+          colorType="groundColor"
         />
         <ComponentsColorPicker
           label="Nadir Color"
           path={skyNadirColorPath}
           pathLength={skyNadirColorPath.length}
           dataType={"JSON"}
+          colorType="nadirColor"
         />
         <ComponentsColorPicker
           label="Sky Color"
           path={skyskyColorPath}
           pathLength={skyskyColorPath.length}
           dataType={"JSON"}
+          colorType="skyColor"
         />
         <ComponentsColorPicker
           label="Zenith Color"
           path={skyZenithColorPath}
           pathLength={skyZenithColorPath.length}
           dataType={"JSON"}
+          colorType="zenithColor"
         />
       </ExpandableBlock>
 
@@ -191,18 +187,20 @@ export function ColorOptionsPanel() {
           path={groundAboveColorPath}
           pathLength={groundAboveColorPath.length}
           dataType={"JSON"}
+          colorType="aboveColor"
         />
         <ComponentsColorPicker
           label="Below Color"
           path={groundBelowColorPath}
           pathLength={groundBelowColorPath.length}
           dataType={"JSON"}
+          colorType="belowColor"
         />
       </ExpandableBlock>
 
       <ExpandableBlock title="Selected Element Color">
         <SelectedElementColorPicker label="Selected Color" />
-        <div className="two-object-container-row">
+        <div className="idp-two-object-container-row">
           <SelectedElementColorButton label="Apply Color" action="apply" />
           <SelectedElementColorButton label="Reset Color" action="clear" />
         </div>

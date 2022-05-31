@@ -7,11 +7,9 @@
 import { RenderMode } from "@bentley/imodeljs-common";
 import { IModelApp } from "@bentley/imodeljs-frontend";
 import {
-  DropdownButton,
   ExpandableBlock,
   InputGroup,
-  MenuItem,
-  Text,
+  LabeledSelect,
   ToggleSwitch,
 } from "@itwin/itwinui-react";
 import React, { useState } from "react";
@@ -68,99 +66,23 @@ const setRenderModeInView = (mode: RenderMode) => {
   }
 };
 
-const getCurrentRenderMode = () => {
-  const viewport = IModelApp.viewManager.selectedView;
-  if (viewport) {
-    return viewport.view.viewFlags.renderMode;
-  }
-  return RenderMode.SmoothShade;
-};
-
-const getRenderModeLabel = (mode: RenderMode) => {
-  switch (mode) {
-    case RenderMode.Wireframe:
-      return "Wireframe";
-    case RenderMode.SmoothShade:
-      return "Smooth Shade";
-    case RenderMode.HiddenLine:
-      return "Hidden Line";
-    case RenderMode.SolidFill:
-      return "Solid Fill";
-  }
-};
-
-interface RenderModeMenuItemProps {
-  key: string;
-  mode: RenderMode;
-  close: () => void;
-  setRenderMode: (value: number) => void;
-}
-
-const RenderModeMenuItem = ({
-  key,
-  mode,
-  close,
-  setRenderMode,
-}: RenderModeMenuItemProps) => {
-  return (
-    <MenuItem
-      key={key}
-      onClick={() => {
-        setRenderModeInView(mode);
-        setRenderMode(getCurrentRenderMode());
-        close();
-      }}
-    >
-      {getRenderModeLabel(mode)}
-    </MenuItem>
-  );
-};
-
-export function RenderModeDropdown() {
-  const [renderMode, setRenderMode] = useState(getCurrentRenderMode());
-  const menuItems = (close: () => void) => [
-    <RenderModeMenuItem
-      key={"1"}
-      mode={RenderMode.Wireframe}
-      close={close}
-      setRenderMode={setRenderMode}
-    />,
-    <RenderModeMenuItem
-      key={"2"}
-      mode={RenderMode.SmoothShade}
-      close={close}
-      setRenderMode={setRenderMode}
-    />,
-    <RenderModeMenuItem
-      key={"3"}
-      mode={RenderMode.HiddenLine}
-      close={close}
-      setRenderMode={setRenderMode}
-    />,
-    <RenderModeMenuItem
-      key={"4"}
-      mode={RenderMode.SolidFill}
-      close={close}
-      setRenderMode={setRenderMode}
-    />,
-  ];
-  return (
-    <DropdownButton menuItems={menuItems}>
-      {getRenderModeLabel(renderMode)}
-    </DropdownButton>
-  );
-}
-
 export function RenderModeSelector() {
+  const [value, setValue] = useState<RenderMode | undefined>(undefined);
   return (
-    <div className="idp-render-mode">
-      <div className="idp-render-mode-label two-object-container-row">
-        <Text>Render Mode:</Text>
-      </div>
-      <div className="idp-render-mode-dropdown">
-        <RenderModeDropdown />
-      </div>
-    </div>
+    <LabeledSelect
+      label="Render Mode:"
+      options={[
+        { value: RenderMode.Wireframe, label: "Wireframe" },
+        { value: RenderMode.SmoothShade, label: "Smooth Shade" },
+        { value: RenderMode.HiddenLine, label: "Hidden Line" },
+        { value: RenderMode.SolidFill, label: "Solid Fill" },
+      ]}
+      value={value}
+      onChange={(value) => {
+        setRenderModeInView(value);
+        setValue(value);
+      }}
+    />
   );
 }
 
