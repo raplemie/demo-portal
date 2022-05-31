@@ -1799,10 +1799,10 @@
   resolved "https://registry.yarnpkg.com/@itwin/itwinui-css/-/itwinui-css-0.24.7.tgz#6be2e922eddacd520d33bd0b1ccb51d17cdfa261"
   integrity sha512-5HJNGUNtnL7NMhtv5THmlx3LGoF+M+kwftEUhl9zxfvVS2nXkn3pY1dunXt8MESANcV91rQmOfJrSyXDdd6A/A==
 
-"@itwin/itwinui-css@^0.58.0":
-  version "0.58.0"
-  resolved "https://registry.yarnpkg.com/@itwin/itwinui-css/-/itwinui-css-0.58.0.tgz#e385efc7ce903fc56e955976271e366fa3c0265c"
-  integrity sha512-BBMoB8OuMR8v5ndBgZlWDSEgIuJzOh5ja3WxH3w2uaT3VWnFMS00DURhYnfNnBOqnWbGWz7v8eX56GuZfIhUbQ==
+"@itwin/itwinui-css@^0.25.2":
+  version "0.25.2"
+  resolved "https://registry.yarnpkg.com/@itwin/itwinui-css/-/itwinui-css-0.25.2.tgz#fba03c9ab73af9deec4e826d76e41281d47a56a2"
+  integrity sha512-eiyaz6Uqy+SGlpaymYRM+Oej+/OaHvSK8LefEHbqubfWTryICaYzQQJctweBgdOz/A6eS6Tf5BlecIMY61iN6w==
 
 "@itwin/itwinui-css@^0.9.0":
   version "0.9.0"
@@ -1818,11 +1818,6 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@itwin/itwinui-icons-react/-/itwinui-icons-react-1.2.0.tgz#82c6f6896639990c31ee806ee2af6a9ed23856fd"
   integrity sha512-yeBIJPWli/iLKaTLmhsd7ZOn9bMRouN3dGHggJjBjAsgJNNtahbfB/NfOS17DcN6Ejt4Z70VAzMdpwzJ/34CKA==
-
-"@itwin/itwinui-icons-react@^1.5.0":
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/@itwin/itwinui-icons-react/-/itwinui-icons-react-1.10.1.tgz#fb6517089ba964a57cc3fec37a63af3ccd4768e0"
-  integrity sha512-kBxDI1TuKiVtHhGmRVX5oOz1dszKvNUcYcDYOd2RzKVbHA8nMfx6dq3E8n4j2FeYGgxM9/wYpe/4wE0ykS8NuA==
 
 "@itwin/itwinui-illustrations-react@^1.0.1":
   version "1.0.2"
@@ -1843,13 +1838,13 @@
     react-table "^7.1.0"
     react-transition-group "^4.1.1"
 
-"@itwin/itwinui-react@^1.38.1":
-  version "1.38.1"
-  resolved "https://registry.yarnpkg.com/@itwin/itwinui-react/-/itwinui-react-1.38.1.tgz#16a530f15ef2fca7ee03ffc13eb030ac23afc0bc"
-  integrity sha512-iZPwWF85b0NJ0hI/iK3oWt+bZ5fbIi3/1LLExSyh1Z6IkemZsqbld6Wj8nnGfRQ+V3RU0e9JQUkZC77nM++m1w==
+"@itwin/itwinui-react@^1.15.0":
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/@itwin/itwinui-react/-/itwinui-react-1.15.0.tgz#c56db301b26de2ee043eb7f002a817f73257b335"
+  integrity sha512-GEA016GIfauH2E30cZK09Ye6nzlbabwjs+LGt6cKPDt+eMjCQmkIXTyZPqWWYYRkBsBkUTI23NdclLjr9Xtqcg==
   dependencies:
-    "@itwin/itwinui-css" "^0.58.0"
-    "@itwin/itwinui-icons-react" "^1.5.0"
+    "@itwin/itwinui-css" "^0.25.2"
+    "@itwin/itwinui-icons-react" "^1.1.1"
     "@itwin/itwinui-illustrations-react" "^1.0.1"
     "@tippyjs/react" "^4.2.5"
     "@types/react-table" "^7.0.18"

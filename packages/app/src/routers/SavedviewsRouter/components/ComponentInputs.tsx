@@ -8,7 +8,7 @@
 import { ColorByName, ColorDef } from "@bentley/imodeljs-common";
 import { IModelApp } from "@bentley/imodeljs-frontend";
 import { ColorPickerButton } from "@bentley/ui-components";
-import { Label, LabeledInput, Slider } from "@itwin/itwinui-react";
+import { LabeledInput, Slider } from "@itwin/itwinui-react";
 import React, { useState } from "react";
 
 import { generateJSONInStyles } from "../GenerateJSONStyles";
@@ -77,9 +77,10 @@ export function ComponentsColorPicker({
   dataType,
   colorType,
 }: ComponentsColorPickerProps) {
+  // TODO: Better formatting for label
   return (
     <div className="idp-label-with-color-picker">
-      <Label>{label}</Label>
+      <div>{label}</div>
       <ColorPickerButton
         initialColor={checkVariable(path, colorType)}
         onColorPick={(color: ColorDef) => {
@@ -133,11 +134,12 @@ export function ComponentsSlider({
   step,
 }: ComponentsSliderProps) {
   const [value, setValue] = useState(0.2);
+  // TODO: Better formatting for label
   return (
     <div className="idp-label-with-slider">
-      <Label>
+      <div>
         {label} : {value.toFixed(1)}
-      </Label>
+      </div>
       <Slider
         style={{ width: "100%" }}
         thumbMode="inhibit-crossing"

@@ -7,12 +7,7 @@
 import { ColorDef } from "@bentley/imodeljs-common";
 import { EmphasizeElements, IModelApp } from "@bentley/imodeljs-frontend";
 import { ColorPickerButton } from "@bentley/ui-components";
-import {
-  Button,
-  ExpandableBlock,
-  Label,
-  ToggleSwitch,
-} from "@itwin/itwinui-react";
+import { Button, ExpandableBlock, ToggleSwitch } from "@itwin/itwinui-react";
 import React, { useState } from "react";
 
 import { generateJSONInStyles } from "../GenerateJSONStyles";
@@ -81,9 +76,10 @@ export interface SelectedElementColorPickerProps {
 export function SelectedElementColorPicker({
   label,
 }: SelectedElementColorPickerProps) {
+  // TODO: Better formatting for label
   return (
     <div className="idp-label-with-color-picker">
-      <Label>{label}</Label>
+      <div>{label}</div>
       <ColorPickerButton
         initialColor={ColorDef.fromString("skyblue")}
         onColorPick={(color: ColorDef) => {
