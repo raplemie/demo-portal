@@ -1,0 +1,46 @@
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *
+ * This code is for demonstration purposes and should not be considered production ready.
+ *--------------------------------------------------------------------------------------------*/
+
+.idp-label-with-slider {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.idp-label-with-color-picker {
+  display: flex;
+  justify-content: space-between;
+}
+
+.idp-button-label {
+  width: 100px;
+  height: 30px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.idp-button-container {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: -10px;
+}
+
+.idp-two-object-container-row {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.idp-label {
+  height: 25px;
+}
